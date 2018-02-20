@@ -164,6 +164,7 @@ namespace Lan_Chat
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            Icon = Properties.Resources.icon;
             string strHostName = Dns.GetHostName();
             IPHostEntry ipEntry = Dns.GetHostEntry(strHostName);
             IPAddress[] addr = ipEntry.AddressList;
