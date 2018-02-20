@@ -73,6 +73,10 @@ namespace Lan_Chat
                         string message = data.ReadString(ref pos);
                         userip(sender, source.Address.ToString());
                         textBox2.AppendText("\r\n" + listView1.Items[ipdict[source.Address.ToString()]].SubItems[2].Text + ":\"" + sender + "\": " + message);
+                        if (WindowState == FormWindowState.Minimized)
+                        {
+                            notifyIcon1.ShowBalloonTip(100,sender,message,ToolTipIcon.None);
+                        }
                         break;
                     case 1:
                         userip(data.ReadString(ref pos), source.Address.ToString());
@@ -163,6 +167,7 @@ namespace Lan_Chat
             string strHostName = Dns.GetHostName();
             IPHostEntry ipEntry = Dns.GetHostEntry(strHostName);
             IPAddress[] addr = ipEntry.AddressList;
+            notifyIcon1.Icon = Icon;
             for (int i = 0; i < addr.Length; i++)
             {
                 if (addr[i].AddressFamily == AddressFamily.InterNetwork)
@@ -179,6 +184,7 @@ namespace Lan_Chat
             listener = new Thread(new ThreadStart(worker));
             listener.Start();
             timer1.Start();
+            textBox1.Text = Environment.UserName;
         }
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -304,6 +310,32 @@ namespace Lan_Chat
         private void DownloadProgress()
         {
             button2.Text = "Download: " + rcvfile + " " + Math.Round(100 * (rcvnextpart / (double)rcvpart), 1).ToString() + "%";
+        }
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            WindowState = FormWindowState.Normal;
+            Focus();
+        }
+
+        private void MainForm_SizeChanged(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                ShowInTaskbar = false;
+                notifyIcon1.Visible = true;
+            }
+            else
+            {
+                ShowInTaskbar = true;
+                notifyIcon1.Visible = false;
+            }
+        }
+
+        private void notifyIcon1_BalloonTipClicked(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Normal;
+            Focus();
         }
     }
 }

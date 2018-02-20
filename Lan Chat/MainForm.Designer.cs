@@ -49,6 +49,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -67,11 +68,10 @@
             // 
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox1.Location = new System.Drawing.Point(0, 0);
-            this.textBox1.MaxLength = 15;
+            this.textBox1.MaxLength = 30;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(80, 20);
             this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "Name";
             this.textBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox1_MouseClick);
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -277,6 +277,12 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.BalloonTipClicked += new System.EventHandler(this.notifyIcon1_BalloonTipClicked);
+            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -288,6 +294,7 @@
             this.Text = "LAN-Chat by Arwarld";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
@@ -328,6 +335,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
     }
 }
 
